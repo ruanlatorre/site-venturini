@@ -95,7 +95,7 @@ body {
     border-radius: 40px;
     padding: 20px 15px;
     width: 90%;
-    max-width: 380px;
+    max-width: 420px;
     height: 90dvh;
     max-height: 750px;
     display: flex;
@@ -133,7 +133,7 @@ body {
 
 h2 {
     font-family: 'Dancing Script', cursive;
-    font-size: 2.2rem;
+    font-size: 2.6rem;
     margin-bottom: 10px;
     color: #ffffff;
     text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
@@ -461,7 +461,10 @@ button:hover {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    opacity: 0.8;.audio-container {
+    opacity: 0.8;
+}
+
+.audio-container {
     background: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 20px;
@@ -474,8 +477,6 @@ button:hover {
 audio {
     width: 100%;
     height: 40px;
-}
-px;
     filter: invert(1);
 }
 
