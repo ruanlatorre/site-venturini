@@ -160,6 +160,24 @@ function acceptProposal() {
     openScreen('resposta');
 }
 
+function togglePhotoView() {
+    const sliderView = document.getElementById('view-slider');
+    const gridView = document.getElementById('view-grid');
+    const icon = document.getElementById('toggle-icon');
+
+    if (sliderView && gridView && icon) {
+        if (sliderView.classList.contains('active')) {
+            sliderView.classList.remove('active');
+            gridView.classList.add('active');
+            icon.innerText = "📁";
+        } else {
+            gridView.classList.remove('active');
+            sliderView.classList.add('active');
+            icon.innerText = "📸";
+        }
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     // Hidden fallback for all screens initially except active
     updateDots();

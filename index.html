@@ -65,15 +65,32 @@
 
         <!-- FOTOS -->
         <div id="fotos" class="tela">
-            <h2>Nossos Momentos</h2>
+            <div class="header-fotos">
+                <h2>Nossos Momentos</h2>
+                <button class="btn-toggle" onclick="togglePhotoView()" title="Alternar Visualização">
+                    <span id="toggle-icon">📸</span>
+                </button>
+            </div>
 
-            <div class="polaroid-wrapper">
-                <div class="photos-container" id="photos-scroll">
-                    <!-- As fotos serão inseridas via JS ou mantidas aqui para scroll-snap -->
-                    <div class="polaroid"><img src="https://picsum.photos/seed/amor1/400/500" alt="Foto 1"></div>
-                    <div class="polaroid"><img src="https://picsum.photos/seed/amor2/400/500" alt="Foto 2"></div>
-                    <div class="polaroid"><img src="https://picsum.photos/seed/amor3/400/500" alt="Foto 3"></div>
-                    <div class="polaroid"><img src="https://picsum.photos/seed/amor4/400/500" alt="Foto 4"></div>
+            <div class="photo-view-container">
+                <div id="view-slider" class="photo-view active">
+                    <div class="polaroid-wrapper">
+                        <div class="photos-container" id="photos-scroll">
+                            <div class="polaroid"><img src="https://picsum.photos/seed/amor1/400/500" alt="Foto 1"></div>
+                            <div class="polaroid"><img src="https://picsum.photos/seed/amor2/400/500" alt="Foto 2"></div>
+                            <div class="polaroid"><img src="https://picsum.photos/seed/amor3/400/500" alt="Foto 3"></div>
+                            <div class="polaroid"><img src="https://picsum.photos/seed/amor4/400/500" alt="Foto 4"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="view-grid" class="photo-view">
+                    <div class="photos-grid">
+                        <div class="grid-item"><img src="https://picsum.photos/seed/amor1/400/500" alt="Foto 1"></div>
+                        <div class="grid-item"><img src="https://picsum.photos/seed/amor2/400/500" alt="Foto 2"></div>
+                        <div class="grid-item"><img src="https://picsum.photos/seed/amor3/400/500" alt="Foto 3"></div>
+                        <div class="grid-item"><img src="https://picsum.photos/seed/amor4/400/500" alt="Foto 4"></div>
+                    </div>
                 </div>
             </div>
 
@@ -84,14 +101,12 @@
         <div id="historia" class="tela">
             <h2>Como Tudo Começou</h2>
             <div class="overflow-scroll">
-                <p>Tudo começou no terceiro ano do ensino médio.<br><br>
-                Entre conversas, risadas e momentos inesperados, a gente foi se aproximando e sem perceber começamos
-                a construir algo muito especial.</p>
+                <p>Tudo começou no terceiro ano do ensino médio.<br>
+                    Entre conversas, risadas e momentos inesperados, a gente foi se aproximando e sem perceber começamos
+                    a construir algo muito especial.</p>
                 <p>Passamos por momentos bons e também por momentos difíceis, mas mesmo assim nunca nos afastamos.
-                Sempre encontramos um jeito de continuar juntos, de entender um ao outro e seguir em frente.</p>
-                <p>Desde o dia 15 de junho de 2025, cada lembrança ao seu lado se tornou algo importante para mim. E
-                olhando para tudo que vivemos até hoje, eu só consigo pensar em uma coisa:</p>
-                <p><strong style="color: #ffd1dc;">Você faz minha vida muito mais feliz. ❤️</strong></p>
+                    Sempre encontramos um jeito de continuar juntos, de entender um ao outro e seguir em frente.</p>
+                <p>Desde o dia 15 de junho de 2025, cada lembrança ao seu lado se tornou algo importante para mim. E olhando para tudo que vivemos até hoje, eu só consigo pensar em uma coisa: <strong style="color: #ffd1dc;">Você faz minha vida muito mais feliz. ❤️</strong></p>
             </div>
             <button onclick="openScreen('menu')">Voltar ao Menu</button>
         </div>
@@ -139,9 +154,10 @@
         <div id="carta" class="tela">
             <h2>Para Rafaella</h2>
             <div class="overflow-scroll">
-                <p>Desde o dia 15 de junho de 2025 nossa história vem sendo construída com muitos momentos especiais.</p>
+                <p>Desde o dia 15 de junho de 2025 nossa história vem sendo construída com muitos momentos especiais.
+                </p>
                 <p>Vivemos risadas, aprendizados, desafios e memórias que eu nunca vou esquecer. Cada momento ao seu
-                lado fez tudo valer a pena.</p>
+                    lado fez tudo valer a pena.</p>
                 <p>E por tudo que vivemos juntos, eu queria te fazer uma pergunta muito importante...</p>
             </div>
 
