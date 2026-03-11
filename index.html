@@ -145,24 +145,14 @@
 
         <!-- MUSICA -->
         <div id="musica" class="tela">
-            <div class="spotify-container">
-                <div class="spotify-bg" style="background-image: url('media/capa_casal.png');"></div>
-                <div class="spotify-content">
-                    <div class="album-art">
-                        <img src="media/capa_casal.png" alt="Capa do Casal">
-                    </div>
-                    <div class="track-info">
-                        <h3>Nossa Música</h3>
-                        <p>Tocando agora seu coração...</p>
-                    </div>
-                    <div class="audio-player-wrapper">
-                        <audio id="musica-player" controls>
-                            <source src="media/nossa_musica.mp3" type="audio/mpeg">
-                        </audio>
-                    </div>
-                </div>
+            <h2>Nossa Música</h2>
+            <p>Aperte o play e lembre da gente...</p>
+            <div class="audio-container">
+                <audio id="musica-player" controls>
+                    <source src="media/nossa_musica.mp3" type="audio/mpeg">
+                </audio>
             </div>
-            <button onclick="openScreen('menu')" class="btn-spotify-back">Voltar ao Menu</button>
+            <button onclick="openScreen('menu')">Voltar ao Menu</button>
         </div>
 
         <!-- CARTA -->
