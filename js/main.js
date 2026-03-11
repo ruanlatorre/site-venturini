@@ -184,7 +184,30 @@ function togglePhotoView() {
     }
 }
 
+function preloadImages() {
+    const imagesToPreload = [
+        "https://picsum.photos/seed/amor1/400/500",
+        "https://picsum.photos/seed/amor2/400/500",
+        "https://picsum.photos/seed/amor3/400/500",
+        "https://picsum.photos/seed/amor4/400/500"
+    ];
+
+    imagesToPreload.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-    // Hidden fallback for all screens initially except active
     updateDots();
+    preloadImages();
+});
+
+window.addEventListener("load", () => {
+    const preloader = document.getElementById("preloader");
+    if (preloader) {
+        setTimeout(() => {
+            preloader.classList.add("loaded");
+        }, 500); // Pequeno delay para garantir que a transição seja vista
+    }
 });

@@ -89,7 +89,7 @@ body {
     position: relative;
     z-index: 10;
     /* Vidro mais nítido */
-    background: transparent; 
+    background: transparent;
     backdrop-filter: blur(8px) saturate(120%);
     -webkit-backdrop-filter: blur(8px) saturate(120%);
     border-radius: 40px;
@@ -330,8 +330,15 @@ button:hover {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .polaroid-wrapper {
@@ -370,10 +377,21 @@ button:hover {
 }
 
 /* Rotações aleatórias leves para o grid */
-.grid-item:nth-child(1) { --rotation: -2deg; }
-.grid-item:nth-child(2) { --rotation: 2deg; }
-.grid-item:nth-child(3) { --rotation: 1deg; }
-.grid-item:nth-child(4) { --rotation: -1deg; }
+.grid-item:nth-child(1) {
+    --rotation: -2deg;
+}
+
+.grid-item:nth-child(2) {
+    --rotation: 2deg;
+}
+
+.grid-item:nth-child(3) {
+    --rotation: 1deg;
+}
+
+.grid-item:nth-child(4) {
+    --rotation: -1deg;
+}
 
 .photos-container {
     display: flex;
@@ -482,7 +500,8 @@ audio {
 
 .botoes-pedido {
     position: relative;
-    height: 200px; /* Definindo altura fixa clara para a área de fuga */
+    height: 200px;
+    /* Definindo altura fixa clara para a área de fuga */
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -493,7 +512,8 @@ audio {
 
 #btn-nao {
     position: absolute;
-    top: 120px; /* Posição inicial segura abaixo do Sim */
+    top: 120px;
+    /* Posição inicial segura abaixo do Sim */
     left: 50%;
     transform: translateX(-50%);
     transition: left 0.15s ease, top 0.15s ease;
