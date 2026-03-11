@@ -1,0 +1,449 @@
+/* =========================================
+            VARIABLES & RESET
+   ========================================= */
+:root {
+    --primary: #9b59b6;
+    --secondary: #8e44ad;
+    --bg-start: #a29bfe;
+    --text-white: #ffffff;
+    --lavender: #f7f1ff;
+    --glass-bg: rgba(44, 0, 62, 0.35);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100dvh;
+    background-color: #8e44ad;
+    overflow: hidden;
+    position: fixed;
+    touch-action: none;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-white);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Fundo Roxo Mais Claro e Delicado */
+    background: linear-gradient(-45deg, #a29bfe, #8e44ad, #9b59b6, #dcd0ff);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* =========================================
+            ANIMATIONS (HEARTS)
+   ========================================= */
+.heart {
+    position: fixed;
+    top: -10vh;
+    font-size: 1.5rem;
+    color: #ffffff;
+    /* Brancos para brilhar no roxo claro */
+    animation: fall linear forwards infinite;
+    opacity: 0.5;
+    z-index: 0;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(110vh);
+    }
+}
+
+/* =========================================
+            CONTAINER & SCREENS
+   ========================================= */
+.container {
+    position: relative;
+    z-index: 10;
+    /* Vidro mais nítido */
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 40px;
+    padding: 30px 20px;
+    width: 90%;
+    max-width: 380px;
+    height: 90dvh;
+    max-height: 750px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+
+    /* Relevo Refinado e Borda de Vidro */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.tela {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(10px);
+    width: 100%;
+}
+
+.tela.active {
+    display: flex !important;
+    animation: fadeInUp 0.4s forwards ease-out;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+p,
+.dica {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #ffffff;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+/* =========================================
+            PASSWORD KEYBOARD
+   ========================================= */
+.senha-box {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0 30px 0;
+}
+
+.quadrado {
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid #ffffff;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.quadrado.preenchido {
+    background: #ffffff;
+    box-shadow: 0 0 15px #ffffff;
+    transform: scale(1.2);
+}
+
+.teclado {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.tecla {
+    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 1.6rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    /* Relief effect */
+    box-shadow:
+        inset 2px 2px 5px rgba(255, 255, 255, 0.1),
+        4px 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.tecla:active {
+    transform: scale(0.9);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.tecla-acao {
+    background: rgba(0, 0, 0, 0.4);
+    font-size: 1.3rem;
+}
+
+/* =========================================
+            MENU & NAVIGATION
+   ========================================= */
+.menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.quadro {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #ffffff;
+    font-weight: 400;
+
+    /* Double Relief & Glass */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow:
+        inset 2px 2px 6px rgba(255, 255, 255, 0.1),
+        5px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.quadro:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+button {
+    background: rgba(255, 255, 255, 0.25);
+    border: none;
+    color: #ffffff;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 400;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    background: #ffffff;
+    color: #2c003e;
+    transform: scale(1.05);
+}
+
+.btn-prominent {
+    background: #ffffff;
+    color: #2c003e;
+    font-weight: 600;
+    padding: 18px 30px;
+    font-size: 1.1rem;
+}
+
+.btn-ghost {
+    background: transparent;
+    opacity: 0.8;
+    box-shadow: none;
+    font-size: 0.9rem;
+}
+
+.polaroid-wrapper {
+    width: 100%;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.photos-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding: 10px 40px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.photos-container::-webkit-scrollbar {
+    display: none;
+}
+
+.polaroid {
+    flex: 0 0 calc(100% - 0px);
+    scroll-snap-align: center;
+    position: relative;
+    background: #ffffff;
+    padding: 10px 10px 35px 10px;
+    border-radius: 4px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    transform: rotate(-3deg);
+    width: 280px;
+    max-width: 100%;
+}
+
+.polaroid:nth-child(even) {
+    transform: rotate(3deg);
+}
+
+.polaroid img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.controles-foto {
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    right: -20px;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.btn-foto {
+    width: 45px;
+    height: 45px;
+    background: #4b0082;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.contador-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+}
+
+.tempo-box {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: inset 1px 1px 4px rgba(255, 255, 255, 0.05);
+}
+
+.tempo-valor {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #ffffff;
+    display: block;
+}
+
+.tempo-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
+
+.audio-container {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 30px;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+audio {
+    width: 100%;
+    height: 40px;
+    filter: invert(1);
+}
+
+.botoes-pedido {
+    position: relative;
+    height: 200px; /* Definindo altura fixa clara para a área de fuga */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+#btn-nao {
+    position: absolute;
+    top: 120px; /* Posição inicial segura abaixo do Sim */
+    left: 50%;
+    transform: translateX(-50%);
+    transition: left 0.15s ease, top 0.15s ease;
+    z-index: 100;
+}
+
+.overflow-scroll {
+    overflow-y: auto;
+    max-height: 45vh;
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+.overflow-scroll::-webkit-scrollbar {
+    width: 0;
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 2.2rem;
+    }
+
+    .container {
+        height: 90dvh;
+        width: 95%;
+        padding: 20px 15px;
+    }
+
+    .teclado {
+        gap: 10px;
+    }
+
+    .polaroid {
+        width: 240px;
+    }
+
+    .tempo-box {
+        padding: 15px 10px;
+    }
+
+    .tempo-valor {
+        font-size: 2rem;
+    }
+}

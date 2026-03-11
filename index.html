@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nossa História ❤️</title>
+
+    <!-- Importando fontes românticas e modernas -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Heart Generator -->
+    <div id="coracoes"></div>
+
+    <div class="container">
+
+        <!-- SENHA -->
+        <div id="senha" class="tela active">
+            <h2>Nossa História</h2>
+            <p class="dica">Para entrar, digite nosso dia especial...</p>
+
+            <div class="senha-box">
+                <div class="quadrado" id="q1"></div>
+                <div class="quadrado" id="q2"></div>
+                <div class="quadrado" id="q3"></div>
+                <div class="quadrado" id="q4"></div>
+                <div class="quadrado" id="q5"></div>
+                <div class="quadrado" id="q6"></div>
+            </div>
+
+            <div class="teclado">
+                <div class="tecla" onclick="typeDigit(1)">1</div>
+                <div class="tecla" onclick="typeDigit(2)">2</div>
+                <div class="tecla" onclick="typeDigit(3)">3</div>
+                <div class="tecla" onclick="typeDigit(4)">4</div>
+                <div class="tecla" onclick="typeDigit(5)">5</div>
+                <div class="tecla" onclick="typeDigit(6)">6</div>
+                <div class="tecla" onclick="typeDigit(7)">7</div>
+                <div class="tecla" onclick="typeDigit(8)">8</div>
+                <div class="tecla" onclick="typeDigit(9)">9</div>
+                <div class="tecla tecla-acao" onclick="eraseDigit()">⌫</div>
+                <div class="tecla" onclick="typeDigit(0)">0</div>
+                <div class="tecla tecla-acao" onclick="verifyPassword()">✓</div>
+            </div>
+        </div>
+
+        <!-- MENU -->
+        <div id="menu" class="tela">
+            <h2>Nosso Cantinho</h2>
+            <div class="menu">
+                <div class="quadro" onclick="openScreen('fotos')">📸 Nossas Fotos</div>
+                <div class="quadro" onclick="openScreen('historia')">📖 Nossa História</div>
+                <div class="quadro" onclick="openScreen('tempo')">⏳ Tempo Juntos</div>
+                <div class="quadro" onclick="openScreen('musica')">🎵 Nossa Música</div>
+                <div class="quadro" onclick="openScreen('carta')">💌 Uma Carta para Você</div>
+            </div>
+        </div>
+
+        <!-- FOTOS -->
+        <div id="fotos" class="tela">
+            <h2>Nossos Momentos</h2>
+
+            <div class="polaroid-wrapper">
+                <div class="photos-container" id="photos-scroll">
+                    <!-- As fotos serão inseridas via JS ou mantidas aqui para scroll-snap -->
+                    <div class="polaroid"><img src="https://picsum.photos/seed/amor1/400/500" alt="Foto 1"></div>
+                    <div class="polaroid"><img src="https://picsum.photos/seed/amor2/400/500" alt="Foto 2"></div>
+                    <div class="polaroid"><img src="https://picsum.photos/seed/amor3/400/500" alt="Foto 3"></div>
+                    <div class="polaroid"><img src="https://picsum.photos/seed/amor4/400/500" alt="Foto 4"></div>
+                </div>
+            </div>
+
+            <button onclick="openScreen('menu')">Voltar ao Menu</button>
+        </div>
+
+        <!-- HISTÓRIA -->
+        <div id="historia" class="tela">
+            <h2>Como Tudo Começou</h2>
+            <div class="overflow-scroll">
+                <p>Tudo começou no terceiro ano do ensino médio.<br><br>
+                Entre conversas, risadas e momentos inesperados, a gente foi se aproximando e sem perceber começamos
+                a construir algo muito especial.</p>
+                <p>Passamos por momentos bons e também por momentos difíceis, mas mesmo assim nunca nos afastamos.
+                Sempre encontramos um jeito de continuar juntos, de entender um ao outro e seguir em frente.</p>
+                <p>Desde o dia 15 de junho de 2025, cada lembrança ao seu lado se tornou algo importante para mim. E
+                olhando para tudo que vivemos até hoje, eu só consigo pensar em uma coisa:</p>
+                <p><strong style="color: #ffd1dc;">Você faz minha vida muito mais feliz. ❤️</strong></p>
+            </div>
+            <button onclick="openScreen('menu')">Voltar ao Menu</button>
+        </div>
+
+        <!-- TEMPO -->
+        <div id="tempo" class="tela">
+            <h2>Tempo Juntos</h2>
+
+            <div class="contador-grid">
+                <div class="tempo-box">
+                    <div class="tempo-valor" id="dias">0</div>
+                    <div class="tempo-label">Dias</div>
+                </div>
+                <div class="tempo-box">
+                    <div class="tempo-valor" id="horas">0</div>
+                    <div class="tempo-label">Horas</div>
+                </div>
+                <div class="tempo-box">
+                    <div class="tempo-valor" id="minutos">0</div>
+                    <div class="tempo-label">Minutos</div>
+                </div>
+                <div class="tempo-box">
+                    <div class="tempo-valor" id="segundos">0</div>
+                    <div class="tempo-label">Segundos</div>
+                </div>
+            </div>
+
+            <button onclick="openScreen('menu')">Voltar ao Menu</button>
+        </div>
+
+        <!-- MUSICA -->
+        <div id="musica" class="tela">
+            <h2>Nossa Música</h2>
+            <p>Aperte o play e lembre da gente...</p>
+            <div class="audio-container">
+                <audio controls>
+                    <source src="Music/nossa_musica.mp3" type="audio/mpeg">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+            </div>
+            <button onclick="openScreen('menu')">Voltar ao Menu</button>
+        </div>
+
+        <!-- CARTA -->
+        <div id="carta" class="tela">
+            <h2>Para Rafaella</h2>
+            <div class="overflow-scroll">
+                <p>Desde o dia 15 de junho de 2025 nossa história vem sendo construída com muitos momentos especiais.</p>
+                <p>Vivemos risadas, aprendizados, desafios e memórias que eu nunca vou esquecer. Cada momento ao seu
+                lado fez tudo valer a pena.</p>
+                <p>E por tudo que vivemos juntos, eu queria te fazer uma pergunta muito importante...</p>
+            </div>
+
+            <div class="btn-group">
+                <button onclick="openScreen('pedido')" class="btn-prominent">Ler Pergunta</button>
+                <button onclick="openScreen('menu')" class="btn-ghost">Voltar</button>
+            </div>
+        </div>
+
+        <!-- PEDIDO -->
+        <div id="pedido" class="tela">
+            <h2>Amor, você quer sair comigo dia 15/06/2026?</h2>
+
+            <div class="botoes-pedido">
+                <button id="btn-sim" onclick="acceptProposal()">Sim, eu quero! 😍</button>
+                <button id="btn-nao" onclick="runAway(this)">Não</button>
+            </div>
+        </div>
+
+        <!-- RESPOSTA FINAL -->
+        <div id="resposta" class="tela">
+            <h2>Então fique pronta! ✨</h2>
+            <p>Esteja pronta às <strong>19:30</strong> para um jantar especial.</p>
+            <p>E vá com sua melhor roupa, porque esse dia vai ser inesquecível para nós dois. Te amo! ❤️</p>
+            <button onclick="openScreen('menu')">Voltar ao menu</button>
+        </div>
+
+    </div>
+
+    <!-- MAIN SCRIPT -->
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
