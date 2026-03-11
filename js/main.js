@@ -83,6 +83,12 @@ function openScreen(telaId) {
     // Não forçamos o display aqui para deixar o CSS .active (flex) agir
     setTimeout(() => {
         activeTela.classList.add('active');
+        
+        // Tocar música ao entrar na seção
+        if (telaId === 'musica') {
+            const player = document.getElementById('musica-player');
+            if (player) player.play().catch(e => console.log("Autoplay bloqueado:", e));
+        }
     }, 10);
 }
 
