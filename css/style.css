@@ -382,7 +382,9 @@ button:hover {
     background: #ffffff;
     padding: 5px 5px 15px 5px;
     border-radius: 2px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 10px 15px rgba(0, 0, 0, 0.1);
     transform: rotate(var(--rotation, 0deg));
     transition: 0.3s;
 }
@@ -437,7 +439,9 @@ button:hover {
     background: #ffffff;
     padding: 10px 10px 35px 10px;
     border-radius: 4px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.08),
+        0 20px 40px rgba(0, 0, 0, 0.12);
     transform: rotate(-3deg);
     width: 280px;
     max-width: 100%;
