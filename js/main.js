@@ -1,25 +1,28 @@
 function createHearts() {
-    // Using heart character so we can style it with CSS colors (light pink)
     const heartSymbol = "♥";
-    const heartColors = ["#e0b0ff", "#ca9bf7", "#b19cd9"];
+    const heartColors = ["#e0b0ff", "#ca9bf7", "#b19cd9", "#ffffff", "#ffdef2"];
 
-    for (let i = 0; i < 35; i++) {
+    for (let i = 0; i < 40; i++) {
         let heart = document.createElement("div");
         heart.className = "heart";
         heart.innerHTML = heartSymbol;
 
-        // Randomize light pink colors slightly
+        // Cores suaves e variadas
         heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
 
-        // Horizontal position
+        // Posição horizontal
         heart.style.left = Math.random() * 100 + "vw";
 
-        // Make animation much slower (15 to 35 seconds)
-        heart.style.animationDuration = (15 + Math.random() * 20) + "s";
-        heart.style.animationDelay = (Math.random() * 15) + "s";
+        // Variáveis customizadas para animação orgânica
+        heart.style.setProperty('--drift', (Math.random() * 200 - 100) + "px");
+        heart.style.setProperty('--rotation', (Math.random() * 720 - 360) + "deg");
 
-        // Varying sizes
-        heart.style.fontSize = (1 + Math.random() * 1.5) + "rem";
+        // Duração e delay aleatórios
+        heart.style.animationDuration = (10 + Math.random() * 15) + "s";
+        heart.style.animationDelay = (Math.random() * 10) + "s";
+
+        // Tamanhos variados
+        heart.style.fontSize = (0.8 + Math.random() * 1.5) + "rem";
 
         document.body.appendChild(heart);
     }

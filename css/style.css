@@ -7,7 +7,11 @@
     --bg-start: #a29bfe;
     --text-white: #ffffff;
     --lavender: #f7f1ff;
-    --glass-bg: rgba(44, 0, 62, 0.35);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --romantic-purple: #6c5ce7;
+    --soft-purple: #a29bfe;
+    --deep-purple: #2d3436;
 }
 
 * {
@@ -21,7 +25,7 @@ html,
 body {
     width: 100%;
     height: 100dvh;
-    background-color: #8e44ad;
+    background-color: #6c5ce7;
     overflow: hidden;
     position: fixed;
     touch-action: none;
@@ -37,24 +41,16 @@ body {
     align-items: center;
     justify-content: center;
 
-    /* Fundo Roxo Mais Claro e Delicado */
-    background: linear-gradient(-45deg, #a29bfe, #8e44ad, #9b59b6, #dcd0ff);
+    /* Gradiente Animado mais Rico */
+    background: linear-gradient(-45deg, #6c5ce7, #a29bfe, #8e44ad, #dcd0ff);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
 }
 
 @keyframes gradientBG {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* =========================================
@@ -65,20 +61,24 @@ body {
     top: -10vh;
     font-size: 1.5rem;
     color: #ffffff;
-    /* Brancos para brilhar no roxo claro */
     animation: fall linear forwards infinite;
     opacity: 0.7;
     z-index: 0;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    pointer-events: none;
 }
 
 @keyframes fall {
     0% {
-        transform: translateY(0);
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
     }
-
+    10% {
+        opacity: 0.8;
+    }
     100% {
-        transform: translateY(110vh);
+        transform: translateY(110vh) translateX(var(--drift, 50px)) rotate(var(--rotation, 360deg));
+        opacity: 0;
     }
 }
 
@@ -88,12 +88,12 @@ body {
 .container {
     position: relative;
     z-index: 10;
-    /* Vidro mais nítido */
-    background: transparent;
-    backdrop-filter: blur(8px) saturate(120%);
-    -webkit-backdrop-filter: blur(8px) saturate(120%);
+    /* Glassmorphism Ultra Premium */
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     border-radius: 40px;
-    padding: 20px 15px;
+    padding: 30px 20px;
     width: 90%;
     max-width: 420px;
     height: 90dvh;
@@ -103,11 +103,13 @@ body {
     justify-content: center;
     overflow: hidden;
 
-    /* Relevo Refinado e Borda de Vidro */
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow:
-        inset 0 0 15px rgba(255, 255, 255, 0.1),
-        0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    /* Borda e Sombra de Vidro */
+    border: 1.5px solid var(--glass-border);
+    box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.37),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tela {
@@ -133,19 +135,19 @@ body {
 
 h2 {
     font-family: 'Dancing Script', cursive;
-    font-size: 2.6rem;
-    margin-bottom: 10px;
+    font-size: 3rem;
+    margin-bottom: 20px;
     color: #ffffff;
-    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
 }
 
 p,
 .dica {
-    font-size: 0.88rem;
-    line-height: 1.35;
-    margin-bottom: 10px;
-    color: #ffffff;
-    opacity: 0.95;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 300;
 }
 
@@ -182,32 +184,37 @@ p,
 
 .tecla {
     aspect-ratio: 1;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     color: #ffffff;
     border-radius: 50%;
-    font-size: 1.6rem;
-    font-weight: 400;
+    font-size: 1.8rem;
+    font-weight: 300;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
 
-    /* Relief effect */
-    box-shadow:
-        inset 2px 2px 5px rgba(255, 255, 255, 0.1),
-        4px 8px 15px rgba(0, 0, 0, 0.3);
+    /* Relief effect refined */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tecla:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .tecla:active {
-    transform: scale(0.9);
-    background: rgba(255, 255, 255, 0.25);
+    transform: scale(0.92);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .tecla-acao {
-    background: rgba(0, 0, 0, 0.4);
-    font-size: 1.3rem;
+    background: rgba(0, 0, 0, 0.25);
+    font-size: 1.4rem;
 }
 
 /* =========================================
@@ -221,63 +228,79 @@ p,
 }
 
 .quadro {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 18px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 22px;
     border-radius: 25px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     color: #ffffff;
     font-weight: 400;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 
-    /* Double Relief & Glass */
+    /* Double Relief & Glass Refined */
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow:
-        inset 2px 2px 6px rgba(255, 255, 255, 0.1),
-        5px 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .quadro:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(10px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 button {
-    background: rgba(255, 255, 255, 0.25);
-    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
     color: #ffffff;
-    padding: 12px 25px;
+    padding: 12px 28px;
     border-radius: 50px;
     font-family: inherit;
     cursor: pointer;
-    transition: 0.3s;
-    font-weight: 400;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    letter-spacing: 0.5px;
 }
 
 button:hover {
     background: #ffffff;
-    color: #2c003e;
-    transform: scale(1.05);
+    color: var(--romantic-purple);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .btn-prominent {
     background: #ffffff;
-    color: #2c003e;
+    color: var(--romantic-purple);
     font-weight: 600;
-    padding: 18px 30px;
-    font-size: 1.1rem;
+    padding: 18px 36px;
+    font-size: 1.15rem;
+    box-shadow: 0 10px 30px rgba(108, 92, 231, 0.3);
+}
+
+.btn-prominent:hover {
+    background: var(--lavender);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(108, 92, 231, 0.4);
 }
 
 .btn-ghost {
     background: transparent;
-    opacity: 0.8;
-    box-shadow: none;
+    border-color: transparent;
+    opacity: 0.7;
     font-size: 0.9rem;
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.05);
+    opacity: 1;
+    color: #ffffff;
 }
 
 .header-fotos {
@@ -523,20 +546,13 @@ audio {
 .overflow-scroll {
     overflow-y: auto;
     max-height: 45vh;
-    padding-right: 10px;
+    padding-right: 8px;
     margin-bottom: 20px;
-}
-
-#historia .overflow-scroll,
-#carta .overflow-scroll {
-    overflow-y: visible;
-    max-height: none;
-    padding-right: 0;
-    margin-bottom: 10px;
+    scrollbar-width: none; /* Firefox */
 }
 
 .overflow-scroll::-webkit-scrollbar {
-    width: 0;
+    display: none; /* Chrome, Safari, Opera */
 }
 
 @media (max-width: 480px) {
