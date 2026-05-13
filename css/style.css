@@ -1,0 +1,584 @@
+/* =========================================
+            VARIABLES & RESET
+   ========================================= */
+:root {
+    --primary: #9b59b6;
+    --secondary: #8e44ad;
+    --bg-start: #a29bfe;
+    --text-white: #ffffff;
+    --lavender: #f7f1ff;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --romantic-purple: #6c5ce7;
+    --soft-purple: #a29bfe;
+    --deep-purple: #2d3436;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100dvh;
+    background-color: #6c5ce7;
+    overflow: hidden;
+    position: fixed;
+    touch-action: none;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-white);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Gradiente Animado mais Rico */
+    background: linear-gradient(-45deg, #6c5ce7, #a29bfe, #8e44ad, #dcd0ff);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* =========================================
+            ANIMATIONS (HEARTS)
+   ========================================= */
+.heart {
+    position: fixed;
+    top: -10vh;
+    font-size: 1.5rem;
+    color: #ffffff;
+    animation: fall linear forwards infinite;
+    opacity: 0.7;
+    z-index: 0;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    pointer-events: none;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(110vh) translateX(var(--drift, 50px)) rotate(var(--rotation, 360deg));
+        opacity: 0;
+    }
+}
+
+/* =========================================
+            CONTAINER & SCREENS
+   ========================================= */
+.container {
+    position: relative;
+    z-index: 10;
+    /* Glassmorphism Ultra Premium */
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-radius: 40px;
+    padding: 30px 20px;
+    width: 90%;
+    max-width: 420px;
+    height: 90dvh;
+    max-height: 750px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    /* Borda e Sombra de Vidro */
+    border: 1.5px solid var(--glass-border);
+    box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.37),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tela {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(10px);
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+.tela::-webkit-scrollbar {
+    display: none;
+}
+
+.tela::before, .tela::after {
+    content: '';
+    margin: auto;
+}
+
+.tela.active {
+    display: flex !important;
+    animation: fadeInUp 0.4s forwards ease-out;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+}
+
+p,
+.dica {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+}
+
+/* =========================================
+            PASSWORD KEYBOARD
+   ========================================= */
+.senha-box {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0 30px 0;
+}
+
+.quadrado {
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid #ffffff;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.quadrado.preenchido {
+    background: #ffffff;
+    box-shadow: 0 0 15px #ffffff;
+    transform: scale(1.2);
+}
+
+.teclado {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.tecla {
+    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+
+    /* Relief effect refined */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tecla:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.tecla:active {
+    transform: scale(0.92);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.tecla-acao {
+    background: rgba(0, 0, 0, 0.25);
+    font-size: 1.4rem;
+}
+
+/* =========================================
+            MENU & NAVIGATION
+   ========================================= */
+.menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.quadro {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 22px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #ffffff;
+    font-weight: 400;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    /* Double Relief & Glass Refined */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.quadro:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(10px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    background: #ffffff;
+    color: var(--romantic-purple);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn-prominent {
+    background: #ffffff;
+    color: var(--romantic-purple);
+    font-weight: 600;
+    padding: 18px 36px;
+    font-size: 1.15rem;
+    box-shadow: 0 10px 30px rgba(108, 92, 231, 0.3);
+}
+
+.btn-prominent:hover {
+    background: var(--lavender);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(108, 92, 231, 0.4);
+}
+
+.btn-ghost {
+    background: transparent;
+    border-color: transparent;
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.05);
+    opacity: 1;
+    color: #ffffff;
+}
+
+.header-fotos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.btn-toggle {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.btn-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.photo-view-container {
+    width: 100%;
+    position: relative;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-view {
+    display: none;
+    width: 100%;
+    transition: opacity 0.4s ease;
+}
+
+.photo-view.active {
+    display: block;
+    animation: fadeIn 0.4s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.polaroid-wrapper {
+    width: 100%;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 10px;
+    width: 100%;
+}
+
+.grid-item {
+    background: #ffffff;
+    padding: 5px 5px 15px 5px;
+    border-radius: 2px;
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 10px 15px rgba(0, 0, 0, 0.1);
+    transform: rotate(var(--rotation, 0deg));
+    transition: 0.3s;
+}
+
+.grid-item:hover {
+    transform: scale(1.05) rotate(0deg);
+    z-index: 5;
+}
+
+.grid-item img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 1px;
+}
+
+/* Rotações aleatórias leves para o grid */
+.grid-item:nth-child(1) {
+    --rotation: -2deg;
+}
+
+.grid-item:nth-child(2) {
+    --rotation: 2deg;
+}
+
+.grid-item:nth-child(3) {
+    --rotation: 1deg;
+}
+
+.grid-item:nth-child(4) {
+    --rotation: -1deg;
+}
+
+.photos-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding: 10px 40px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.photos-container::-webkit-scrollbar {
+    display: none;
+}
+
+.polaroid {
+    flex: 0 0 calc(100% - 0px);
+    scroll-snap-align: center;
+    position: relative;
+    background: #ffffff;
+    padding: 10px 10px 35px 10px;
+    border-radius: 4px;
+    box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.08),
+        0 20px 40px rgba(0, 0, 0, 0.12);
+    transform: rotate(-3deg);
+    width: 280px;
+    max-width: 100%;
+}
+
+.polaroid:nth-child(even) {
+    transform: rotate(3deg);
+}
+
+.polaroid img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+
+.contador-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+}
+
+.tempo-box {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: inset 1px 1px 4px rgba(255, 255, 255, 0.05);
+}
+
+.tempo-valor {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #ffffff;
+    display: block;
+}
+
+.tempo-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
+
+.audio-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 20px;
+    width: 100%;
+    margin-bottom: 25px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+audio {
+    width: 100%;
+    height: 40px;
+    filter: invert(1);
+}
+
+.botoes-pedido {
+    position: relative;
+    height: 200px;
+    /* Definindo altura fixa clara para a área de fuga */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+#btn-nao {
+    position: absolute;
+    top: 120px;
+    /* Posição inicial segura abaixo do Sim */
+    left: 50%;
+    transform: translateX(-50%);
+    transition: left 0.15s ease, top 0.15s ease;
+    z-index: 100;
+}
+
+.overflow-scroll {
+    overflow-y: auto;
+    max-height: 45vh;
+    padding-right: 8px;
+    margin-bottom: 20px;
+    scrollbar-width: none; /* Firefox */
+}
+
+.overflow-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 2.2rem;
+    }
+
+    .container {
+        height: 95dvh;
+        width: 95%;
+        padding: 20px 10px;
+        border-radius: 30px;
+    }
+
+    .teclado {
+        gap: 10px;
+    }
+
+    .polaroid {
+        width: 240px;
+    }
+
+    .photo-view-container {
+        min-height: 280px;
+    }
+
+    .tempo-box {
+        padding: 15px 10px;
+    }
+
+    .tempo-valor {
+        font-size: 2rem;
+    }
+}
